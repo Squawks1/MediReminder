@@ -103,5 +103,98 @@ export class Dbservice {
       })
       .catch(error => this.presentToast('Error al obtener al usuario:' + error));
   }
+
+  // CRUD Usuarios
+
+  crearUsuario(nombre: string, usuario: string, password: string, email: string) {
+    return this.db.executeSql(
+      'INSERT INTO usuarios (nombre, usuario, password, email) VALUES (?, ?, ?, ?)',
+      [nombre, usuario, password, email]
+    );
+  }
+
+  obtenerUsuarios() {
+    return this.db.executeSql('SELECT * FROM usuarios', []).then(res => {
+      let usuarios = [];
+      for (let i = 0; i < res.rows.length; i++) {
+        usuarios.push(res.rows.item(i));
+      }
+      return usuarios;
+    });
+  }
+
+  actualizarUsuario(id: number, nombre: string, usuario: string, password: string, email: string) {
+    return this.db.executeSql(
+      'UPDATE usuarios SET nombre = ?, usuario = ?, password = ?, email = ? WHERE id = ?',
+      [nombre, usuario, password, email, id]
+    );
+  }
+
+  eliminarUsuario(id: number) {
+    return this.db.executeSql('DELETE FROM usuarios WHERE id = ?', [id]);
+  }
+
+  // CRUD Medicamentos
+
+  crearMedicamento(nombre: string, dosis: string, horario: string) {
+    return this.db.executeSql(
+      'INSERT INTO medicamentos (nombre, dosis, horario) VALUES (?, ?, ?)',
+      [nombre, dosis, horario]
+    );
+  }
+
+  obtenerMedicamentos() {
+    return this.db.executeSql('SELECT * FROM medicamentos', []).then(res => {
+      const lista: any[] = [];
+      for (let i = 0; i < res.rows.length; i++) {
+        lista.push(res.rows.item(i));
+      }
+      return lista;
+    })
+    .catch(e => this.presentToast("Error al obtener medicamentos: " + e));
+  }
+
+
+  actualizarMedicamento(id: number, nombre: string, dosis: string, horario: string) {
+    return this.db.executeSql(
+      'UPDATE medicamentos SET nombre = ?, dosis = ?, horario = ? WHERE id = ?',
+      [nombre, dosis, horario, id]
+    );
+  }
+
+  eliminarMedicamento(id: number) {
+    return this.db.executeSql('DELETE FROM medicamentos WHERE id = ?', [id]);
+  }
+
+  // CRUD Recordatorios
+
+  crearRecordatorio(titulo: string, fecha: string, descripcion: string) {
+    return this.db.executeSql(
+      'INSERT INTO recordatorios (titulo, fecha, descripcion) VALUES (?, ?, ?)',
+      [titulo, fecha, descripcion]
+    );
+  }
+
+  obtenerRecordatorios() {
+    return this.db.executeSql('SELECT * FROM recordatorios', []).then(res => {
+      let recs = [];
+      for (let i = 0; i < res.rows.length; i++) {
+        recs.push(res.rows.item(i));
+      }
+      return recs;
+    });
+  }
+
+  actualizarRecordatorio(id: number, titulo: string, fecha: string, descripcion: string) {
+    return this.db.executeSql(
+      'UPDATE recordatorios SET titulo = ?, fecha = ?, descripcion = ? WHERE id = ?',
+      [titulo, fecha, descripcion, id]
+    );
+  }
+
+  eliminarRecordatorio(id: number) {
+    return this.db.executeSql('DELETE FROM recordatorios WHERE id = ?', [id]);
+  }
+
 }
 
