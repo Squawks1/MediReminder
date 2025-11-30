@@ -3,6 +3,10 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthGuard } from 'src/app/guards/auth-guard';
+import { Dbservice } from 'src/app/services/dbservice';
+import { AuthService } from 'src/app/services/auth';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -16,7 +20,9 @@ export class LoginPage {
   constructor(
     private fb: FormBuilder,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private dbservice: Dbservice,
+    private auth: AuthService
   ) {
     // Formulario reactivo y sus validaciones
     this.loginForm = this.fb.group({
@@ -51,17 +57,35 @@ export class LoginPage {
 
   // Función login
   login() {
+    // En caso de ingresar mal un dato
     if (this.loginForm.invalid) {
-      // Mensaje general
-      this.mostrarAlerta('Por favor, verifica los campos ingresados.');
+      this.mostrarAlerta('Por favor, verifique los campos ingresados.');
       return;
     }
 
-    const { usuario } = this.loginForm.value;
-    this.router.navigate(['/home'], { state: { user: usuario } });
+    const { usuario, password } = this.loginForm.value;
+
+    // Validar usuario en la BD
+    this.dbservice.validarUsuario(usuario, password).then((usuarioEncontrado) => {
+
+      if (!usuarioEncontrado) {
+        this.mostrarAlerta('Usuario o contraseña incorrectos.');
+        return;
+      }
+
+      this.auth.login(usuarioEncontrado.id);
+
+      // Cuando se autentifique, pasará a /home
+      this.router.navigate(['/home'], { state: { user: usuarioEncontrado.nombre } });
+
+    });
   }
 
+
+  // Función para llevar a la página registro
   registro() {
     this.router.navigate(['/registro']);
   }
+
+
 }
