@@ -40,6 +40,10 @@ const routes: Routes = [
     redirectTo: 'not-found',
     pathMatch: 'full'
   },
+  {
+    path: 'camara',
+    loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
+  },
 ];
 
 @NgModule({
