@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Dbservice } from 'src/app/services/dbservice';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -16,7 +18,8 @@ export class RegistroPage {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private dbservice: Dbservice
   ) {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -28,7 +31,13 @@ export class RegistroPage {
         ]
       ],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{4}$/)
+        ]
+      ],
       confirmarPassword: ['', Validators.required]
     }, { validators: this.passwordsCoinciden });
   }
@@ -60,8 +69,19 @@ export class RegistroPage {
       return;
     }
 
-    // Si está todo correcto, que se registre la cuenta
-    this.mostrarAlerta('Registro exitoso', 'Su cuenta ha sido creada correctamente.');
-    this.router.navigate(['/login']);
+    // Guardar en la BD
+
+    const { nombre, usuario, email, password } = this.registroForm.value;
+
+    this.dbservice.crearUsuario(nombre, usuario, password, email)
+      .then(() => {
+        this.mostrarAlerta('Registro exitoso', 'Su cuenta ha sido creada correctamente.');
+        this.router.navigate(['/login']);
+      })
+      .catch(error => {
+        console.error(error);
+        this.mostrarAlerta('Error', 'No se pudo registrar correctamente.');
+      });
+
   }
 }
