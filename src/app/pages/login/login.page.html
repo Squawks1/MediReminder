@@ -23,7 +23,7 @@
 
         <ion-item>
           <ion-label position="floating">Usuario</ion-label>
-          <ion-input formControlName="usuario" type="text"></ion-input>
+          <ion-input data-cy="usuario" formControlName="usuario" type="text"></ion-input>
         </ion-item>
 
         <ion-note color="danger" *ngIf="loginForm.get('usuario')?.invalid && loginForm.get('usuario')?.touched">
@@ -32,7 +32,7 @@
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-input data-cy="password" formControlName="password" type="password"></ion-input>
         </ion-item>
         
         <ion-note color="danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
@@ -40,11 +40,11 @@
         </ion-note>
 
         <!-- Botones -->
-        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">
+        <ion-button data-cy="btn-login" expand="block" type="submit" [disabled]="loginForm.invalid">
           Iniciar Sesión
         </ion-button>
 
-        <ion-button expand="block" (click)="registro()" fill="clear" class="register-button">
+        <ion-button data-cy="btn-registro" expand="block" (click)="registro()" fill="clear" class="register-button">
           Regístrate
         </ion-button>
 
