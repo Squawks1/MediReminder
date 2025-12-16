@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding">
 
-  <h2>Hola, {{ usuarioEmail }} 👋</h2>
+  <h2 data-cy="saludo">Hola, {{ usuarioEmail }} 👋</h2>
   <p>Gestiona tus medicamentos y recordatorios fácilmente.</p>
 
   <!-- Tarjeta para agregar o registrar los medicamentos -->
@@ -24,7 +24,7 @@
       Lleva un control de todos tus medicamentos.
     </ion-card-content>
 
-    <ion-button expand="block" color="primary" routerLink="/medicamentos">
+    <ion-button data-cy="btn-medicamentos" expand="block" color="primary" routerLink="/medicamentos">
       Ir a Mis Medicamentos
     </ion-button>
 
@@ -42,7 +42,7 @@
       Configura alarmas para no olvidar tus dosis.
     </ion-card-content>
 
-    <ion-button expand="block" color="secondary" routerLink="/recordatorios">
+    <ion-button data-cy="btn-recordatorios" expand="block" color="secondary" routerLink="/recordatorios">
       Ver Recordatorios
     </ion-button>
     
