@@ -45,6 +45,10 @@ const routes: Routes = [
     redirectTo: 'not-found',
     pathMatch: 'full'
   },
+  {
+    path: 'api-connect',
+    loadChildren: () => import('./api-connect/api-connect.module').then( m => m.ApiConnectPageModule)
+  },
 ];
 
 @NgModule({
