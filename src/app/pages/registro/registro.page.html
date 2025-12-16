@@ -22,12 +22,12 @@
 
         <ion-item>
           <ion-label position="floating">Nombre completo</ion-label>
-          <ion-input formControlName="nombre"></ion-input>
+          <ion-input data-cy="nombre" formControlName="nombre"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Usuario</ion-label>
-          <ion-input formControlName="usuario"></ion-input>
+          <ion-input data-cy="usuario" formControlName="usuario"></ion-input>
         </ion-item>
 
         <ion-note color="danger" *ngIf="registroForm.get('usuario')?.invalid && registroForm.get('usuario')?.touched">
@@ -36,7 +36,7 @@
 
         <ion-item>
           <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input formControlName="email" type="email"></ion-input>
+          <ion-input data-cy="email" formControlName="email" type="email"></ion-input>
         </ion-item>
 
         <ion-note color="danger" *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched">
@@ -45,24 +45,24 @@
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-input data-cy="password" formControlName="password" type="password"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Confirmar contraseña</ion-label>
-          <ion-input formControlName="confirmarPassword" type="password"></ion-input>
+          <ion-input data-cy="confirmarPassword" formControlName="confirmarPassword" type="password"></ion-input>
         </ion-item>
 
         <ion-note color="danger" *ngIf="registroForm.errors?.['noCoinciden'] && registroForm.get('confirmarPassword')?.touched">
           Las contraseñas no coinciden.
         </ion-note>
 
-        <ion-button expand="block" type="submit" [disabled]="registroForm.invalid">
+        <ion-button data-cy="btn-crear" expand="block" type="submit" [disabled]="registroForm.invalid">
           Crear cuenta
         </ion-button>
 
         <!-- En caso de tener una cuenta, que envíe al login-->
-        <ion-button expand="block" fill="clear" color="medium" routerLink="/login">
+        <ion-button data-cy="btn-login" expand="block" fill="clear" color="medium" routerLink="/login">
           Ya tengo una cuenta
         </ion-button>
 
