@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/camara/camara.module').then( m => m.CamaraPageModule)
   },
   {
+    path: 'api-connect',
+    loadChildren: () => import('./api-connect/api-connect.module').then( m => m.ApiConnectPageModule)
+  },
+  {
     path: 'not-found',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
@@ -44,10 +48,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'not-found',
     pathMatch: 'full'
-  },
-  {
-    path: 'api-connect',
-    loadChildren: () => import('./api-connect/api-connect.module').then( m => m.ApiConnectPageModule)
   },
 ];
 
