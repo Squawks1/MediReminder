@@ -1,19 +1,48 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthGuard } from './auth-guard';
+import { AuthService } from '../services/auth';
 
-/*
 describe('AuthGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => AuthGuard(...guardParameters));
+
+  let guard: AuthGuard;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['isLoggedIn']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
+    TestBed.configureTestingModule({
+      providers: [
+        AuthGuard,
+        { provide: AuthService, useValue: authServiceSpy },
+        { provide: Router, useValue: routerSpy }
+      ]
+    });
+
+    guard = TestBed.inject(AuthGuard);
   });
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+  it('Debe permitir el acceso si el usuario está logeado', () => {
+    authServiceSpy.isLoggedIn.and.returnValue(true);
+
+    const result = guard.canActivate();
+
+    // Sigue marcando como "errores" de tipo assertion
+
+    expect(result).toBeTrue();
+    expect(routerSpy.navigate).not.toHaveBeenCalled();
   });
+
+  it('Debe bloquear el acceso y redirigir al login si el usuario no está logeado', () => {
+    authServiceSpy.isLoggedIn.and.returnValue(false);
+
+    const result = guard.canActivate();
+
+    expect(result).toBeFalse();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login']);
+  });
+
 });
-*/
