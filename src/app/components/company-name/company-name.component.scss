@@ -1,12 +1,15 @@
 .company-content {
-    display: flex;
-    align-items: center;
+    padding-top: env(safe-area-inset-top);
+    height: calc(56px + env(safe-area-inset-top));
+    position: relative;
 }
 
 .company-content img {
     width: 25%;
     position: absolute;
     margin-left: 3%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .company-icon {
