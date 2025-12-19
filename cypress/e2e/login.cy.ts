@@ -8,14 +8,18 @@ describe('Login MediReminder', () => {
         cy.contains('Login').should('exist');
         cy.get('[data-cy=usuario]').should('exist');
         cy.get('[data-cy=password]').should('exist');
-        cy.get('[data-cy=btn-login]').should('be.disabled');
+        cy.get('[data-cy=btn-login]')
+            .should('exist')
+            .should('have.class', 'button-disabled');
     });
 
     it('Debe validar campos incorrectos', () => {
         cy.get('[data-cy=usuario]').type('ab');
         cy.get('[data-cy=password]').type('12');
 
-        cy.get('[data-cy=btn-login]').should('be.disabled');
+        cy.get('[data-cy=btn-login]')
+            .should('exist')
+            .should('have.class', 'button-disabled');
 
         cy.contains('El usuario debe tener entre 3 y 8 caracteres').should('exist');
         cy.contains('La contraseña debe ser numérica de 4 dígitos').should('exist');
