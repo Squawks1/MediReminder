@@ -5,7 +5,9 @@ describe('Registro MediReminder', () => {
     });
 
     it('Debe tener el botón Crear cuenta deshabilitado inicialmente', () => {
-        cy.get('[data-cy=btn-crear]').should('be.disabled');
+        cy.get('[data-cy=btn-crear]')
+            .should('exist')
+            .should('have.class', 'button-disabled');
     });
 
     it('Debe validar email incorrecto', () => {
