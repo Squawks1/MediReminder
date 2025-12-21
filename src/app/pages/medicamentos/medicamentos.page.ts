@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 
+import { Dbservice } from '../../services/dbservice';
+
 @Component({
   selector: 'app-medicamentos',
   templateUrl: './medicamentos.page.html',
@@ -11,9 +13,9 @@ import { MenuController } from '@ionic/angular';
 export class MedicamentosPage implements OnInit{
 
   MediReminder: string = 'MediReminder';
-  medicamentos: { nombre: string; dosis: string; horario: string }[] = [];
+  medicamentos: { id: number; nombre: string; dosis: string; horario: string }[] = [];
 
-  constructor(private alertCtrl: AlertController, private menu: MenuController) {}
+  constructor(private alertCtrl: AlertController, private menu: MenuController, private db: Dbservice) {}
 
   //Agregar medicamento
   async agregarMedicamento() {
@@ -29,8 +31,14 @@ export class MedicamentosPage implements OnInit{
         {
           text: 'Guardar',
           handler: (data) => {
-            if (data) {
-              console.log(data);
+            if (data.nombre && data.dosis && data.horario) {
+              this.db.crearMedicamento(
+                data.nombre,
+                data.dosis,
+                data.horario
+              ).then(() => {
+                this.cargarMedicamentos();
+              });
               return true;
             }
             return false;
@@ -56,9 +64,18 @@ export class MedicamentosPage implements OnInit{
         {
           text: 'Actualizar',
           handler: (data) => {
-            this.medicamentos[index] = data;
+            if (data.nombre && data.dosis && data.horario) {
+              this.db.actualizarMedicamento(
+                med.id,
+                data.nombre,
+                data.dosis,
+                data.horario
+              ).then(() => {
+                this.cargarMedicamentos();
+              });
+            }
           },
-        },
+        }
       ],
     });
     await alert.present();
@@ -74,7 +91,10 @@ export class MedicamentosPage implements OnInit{
         {
           text: 'Eliminar',
           handler: () => {
-            this.medicamentos.splice(index, 1);
+            const med = this.medicamentos[index];
+            this.db.eliminarMedicamento(med.id).then(() => {
+              this.cargarMedicamentos();
+            });
           },
         },
       ],
@@ -82,8 +102,22 @@ export class MedicamentosPage implements OnInit{
     await alert.present();
   }
 
+  cargarMedicamentos() {
+    this.db.obtenerMedicamentos().then(data => {
+      this.medicamentos = data;
+    });
+  }
+
   // Cerrar el menú lateral
   ngOnInit(): void {
-    this.menu.close("mainMenu")
+    this.menu.close("mainMenu");
+
+    this.db.dbReady().subscribe(ready => {
+      if (ready) {
+        this.cargarMedicamentos();
+      }
+    });
   }
+
+
 }
