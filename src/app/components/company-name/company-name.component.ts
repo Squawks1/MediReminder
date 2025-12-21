@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-company-name',
@@ -7,9 +9,5 @@ import { Component, Input } from '@angular/core';
   standalone: false,
 })
 export class CompanyNameComponent {
-
-  constructor() { }
-
-    @Input() companyName: string = "MediReminder";
-  
+  @Input() companyName: string = "MediReminder";
 }
