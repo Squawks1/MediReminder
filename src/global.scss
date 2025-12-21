@@ -21,7 +21,7 @@ body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
   // user's system settings.
-  color-scheme: light;
+  color-scheme: light dark;
 
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
@@ -73,3 +73,55 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Ionic Theme Overrides */
+
+:root {
+  --ion-color-primary: #14a3c7;
+  --ion-color-primary-rgb: 20, 163, 199;
+  --ion-color-primary-contrast: #ffffff;
+
+  --app-bg: rgba(255, 255, 255, 0.75);
+  --app-text: #0f172a;
+  --app-muted: #64748b;
+
+  --input-bg: rgba(255, 255, 255, 0.85);
+  --input-text: #0f172a;
+  --input-placeholder: #6b7280;
+}
+
+/* Dark mode Ionic */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --app-bg: rgba(17, 25, 40, 0.9);
+    --app-text: #e5e7eb;
+    --app-muted: #9ca3af;
+
+    --input-bg: rgba(31, 41, 55, 0.95);
+    --input-text: #f9fafb;
+    --input-placeholder: #9ca3af;
+  }
+}
+
+ion-card {
+  background: var(--app-bg);
+  backdrop-filter: blur(6px);
+}
+
+ion-item {
+  --background: transparent;
+}
+
+ion-input,
+ion-textarea {
+  --background: var(--input-bg);
+  color: var(--input-text);
+}
+
+ion-input::part(native)::placeholder {
+  color: var(--input-placeholder);
+}
+
+ion-label {
+  color: var(--app-text);
+}
