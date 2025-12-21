@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-camara',
@@ -11,6 +12,8 @@ export class CamaraPage {
 
   imagen: string = '';
 
+  constructor(private navCtrl: NavController) {}
+
   async tomarFoto() {
     const foto = await Camera.getPhoto({
       quality: 80,
@@ -18,6 +21,10 @@ export class CamaraPage {
     });
 
     this.imagen = foto.dataUrl!;
+  }
+
+  volverHome() {
+    this.navCtrl.navigateRoot('/home');
   }
 
 }
