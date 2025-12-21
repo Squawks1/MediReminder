@@ -18,12 +18,17 @@ export class Dbservice {
     private toastController: ToastController,
     private platform: Platform
   ) {
-    this.initDatabase();
+    this.platform.ready().then(() => {
+      if (this.platform.is('cordova') || this.platform.is('capacitor')) {
+        this.initDatabase();
+      } else {
+        console.log('Modo navegador: SQLite deshabilitado');
+        this.isDBReady.next(true);
+      }
+    });
   }
 
-  async initDatabase() {
-    await this.platform.ready();
-
+  initDatabase() {
     this.sqlite.create({
       name: 'medireminder.db',
       location: 'default'
