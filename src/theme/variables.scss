@@ -1,2 +1,32 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+:root {
+  /* Color principal */
+    --ion-color-primary: #14a3c7;
+    --ion-color-primary-rgb: 20, 163, 199;
+    --ion-color-primary-contrast: #ffffff;
+
+  /* Fondo general */
+    --app-bg: rgba(255, 255, 255, 0.75);
+    --app-text: #0f172a;
+    --app-muted: #64748b;
+
+  /* Formularios */
+    --input-bg: rgba(255, 255, 255, 0.85);
+    --input-text: #0f172a;
+    --input-placeholder: #6b7280;
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+    :root {
+    --app-bg: rgba(17, 25, 40, 0.85);
+    --app-text: #e5e7eb;
+    --app-muted: #9ca3af;
+
+    --input-bg: rgba(31, 41, 55, 0.9);
+    --input-text: #f9fafb;
+    --input-placeholder: #9ca3af;
+    } 
+}
