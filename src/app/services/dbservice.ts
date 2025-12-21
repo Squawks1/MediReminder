@@ -143,15 +143,17 @@ export class Dbservice {
     );
   }
 
-  obtenerMedicamentos() {
+  obtenerMedicamentos(): Promise<any[]> {
     return this.db.executeSql('SELECT * FROM medicamentos', []).then(res => {
       const lista: any[] = [];
       for (let i = 0; i < res.rows.length; i++) {
         lista.push(res.rows.item(i));
       }
       return lista;
-    })
-    .catch(e => this.presentToast("Error al obtener medicamentos: " + e));
+    }).catch(e => {
+      this.presentToast("Error al obtener medicamentos: " + e);
+      return [];
+    });
   }
 
 
