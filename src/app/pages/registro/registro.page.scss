@@ -6,17 +6,9 @@ ion-content {
     background-size: cover; 
 } 
 
-ion-card { 
-    background-color: rgba(255, 255, 255, 0.6); 
-    backdrop-filter: blur(5px); 
-    margin: 10% auto; 
-    width: 90%; 
-    border-radius: 12px; 
-} 
-
 ion-card-title { 
     text-align: center; 
-    color: #14a3c7; 
+    color: var(--ion-color-primary);
 } 
 
 .logo-container { 
@@ -40,15 +32,4 @@ ion-card-title {
     100% {
         transform: scale(0.75);
     }
-}
-
-ion-button { 
-    --background: #14a3c7; 
-    --border-radius: 20px; 
-    margin-top: 10px; 
-} 
-
-ion-button[color="medium"] { 
-    color: #14a3c7; 
-    font-weight: bold; 
 }
