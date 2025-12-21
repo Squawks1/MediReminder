@@ -1,11 +1,9 @@
 describe('Home - MediReminder', () => {
 
     beforeEach(() => {
-        // Simula acceso al Home con credenciales de ejemplo
-        cy.visit('/login');
-        cy.get('[data-cy=usuario]').type('admin');
-        cy.get('[data-cy=password]').type('1234');
-        cy.get('[data-cy=btn-login]').click();
+        //Simula acceso
+        window.localStorage.setItem('usuarioLogeado', '1');
+        cy.visit('/home');
     });
 
     it('Debe mostrar el saludo al usuario', () => {
