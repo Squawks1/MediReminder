@@ -9,6 +9,7 @@ import { RecordatoriosPageRoutingModule } from './recordatorios-routing.module';
 import { RecordatoriosPage } from './recordatorios.page';
 
 import { CompanyNameComponent } from 'src/app/components/company-name/company-name.component';
+import { CompanyNameModule } from 'src/app/components/company-name/company-name.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { CompanyNameComponent } from 'src/app/components/company-name/company-na
     FormsModule,
     IonicModule,
     RecordatoriosPageRoutingModule,
-    CompanyNameComponent
+    CompanyNameModule
   ],
   declarations: [RecordatoriosPage]
 })
