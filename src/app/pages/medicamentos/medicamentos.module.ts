@@ -9,6 +9,7 @@ import { MedicamentosPageRoutingModule } from './medicamentos-routing.module';
 import { MedicamentosPage } from './medicamentos.page';
 
 import { CompanyNameComponent } from 'src/app/components/company-name/company-name.component';
+import { CompanyNameModule } from 'src/app/components/company-name/company-name.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { CompanyNameComponent } from 'src/app/components/company-name/company-na
     FormsModule,
     IonicModule,
     MedicamentosPageRoutingModule,
-    CompanyNameComponent
+    CompanyNameModule
   ],
   declarations: [MedicamentosPage]
 })
