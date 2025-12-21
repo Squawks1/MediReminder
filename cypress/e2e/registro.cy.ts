@@ -21,15 +21,15 @@ describe('Registro MediReminder', () => {
         .should('exist');
     });
 
-    it('Debe validar contraseñas no coincidentes', () => {
-        cy.get('[data-cy=nombre]').type('Juan Perez');
-        cy.get('[data-cy=usuario]').type('juan1');
-        cy.get('[data-cy=email]').type('juan@mail.com');
-        cy.get('[data-cy=password]').type('1234');
-        cy.get('[data-cy=confirmarPassword]').type('0000');
+    it('Debe validar contraseñas que no coinciden', () => {
+        cy.get('[data-cy=nombre]').find('input').type('Juan Perez');
+        cy.get('[data-cy=usuario]').find('input').type('juan1');
+        cy.get('[data-cy=email]').find('input').type('juan@test.com');
 
-        cy.contains('Las contraseñas no coinciden')
-        .should('exist');
+        cy.get('[data-cy=password]').find('input').type('1234').blur();
+        cy.get('[data-cy=confirmarPassword]').find('input').type('9999').blur();
+
+        cy.contains('Las contraseñas no coinciden').should('exist');
     });
 
     it('Debe navegar al login', () => {
