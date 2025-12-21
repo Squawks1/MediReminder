@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { CompanyNameComponent } from '../components/company-name/company-name.component';
+import { CompanyNameModule } from '../components/company-name/company-name.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { CompanyNameComponent } from '../components/company-name/company-name.co
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    CompanyNameComponent
+    CompanyNameModule
   ],
   declarations: [HomePage]
 })
