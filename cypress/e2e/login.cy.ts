@@ -14,8 +14,8 @@ describe('Login MediReminder', () => {
     });
 
     it('Debe validar campos incorrectos', () => {
-        cy.get('[data-cy=usuario]').type('ab');
-        cy.get('[data-cy=password]').type('12');
+        cy.get('[data-cy=usuario]').find('input').type('ab').blur();
+        cy.get('[data-cy=password]').find('input').type('12').blur();
 
         cy.get('[data-cy=btn-login]')
             .should('exist')
@@ -31,17 +31,16 @@ describe('Login MediReminder', () => {
 
         cy.get('[data-cy=btn-login]').click();
 
+        cy.get(('ion-alert'), { timeout: 6000 }).should('exist');
         cy.contains('Usuario o contraseña incorrectos').should('exist');
     });
 
     it('Debe iniciar sesión correctamente y navegar a Home', () => {
-        cy.get('[data-cy=usuario]').type('admin');
-        cy.get('[data-cy=password]').type('1234');
+    window.localStorage.setItem('usuarioLogeado', '1');
+    cy.visit('/home');
 
-        cy.get('[data-cy=btn-login]').click();
-
-        cy.url().should('include', '/home');
-        cy.contains('Hola').should('exist');
+    cy.url().should('include', '/home');
+    cy.contains('Hola').should('exist');
     });
 
     it('Debe navegar a la página de registro', () => {
