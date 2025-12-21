@@ -7,7 +7,7 @@ ion-content {
 }
 
 ion-toolbar {
-    --background: #14a3c7;
+    --background: var(--ion-color-primary);
     --color: white;
 }
 
@@ -19,24 +19,18 @@ ion-toolbar {
 }
 
 h2 {
-    color: #14a3c7;
+    color: var(--ion-color-primary);
     font-weight: bold;
 }
 
 .vacio {
     text-align: center;
-    color: #666;
+    color: var(--app-muted);
     margin-top: 50px;
 }
 
 .icono {
     font-size: 3rem;
-    color: #14a3c7;
+    color: var(--ion-color-primary);
     margin-bottom: 10px;
-}
-
-ion-button {
-    --background: #14a3c7;
-    --border-radius: 12px;
-    font-weight: 500;
 }
